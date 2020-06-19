@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gerador_validador2"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_cpf_generator_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/mao_cpf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoCima">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_cpf_generator_inputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="156dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <EditText
+                android:id="@+id/dig1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toStartOf="@+id/dig3"
+                app:layout_constraintStart_toEndOf="@+id/dig1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toStartOf="@+id/dig6"
+                app:layout_constraintStart_toEndOf="@+id/dig4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/dig9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig8"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dig10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint2"
+                android:importantForAutofill="no"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dig11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/trap"
+                android:hint="@string/digit_hint2"
+                android:importantForAutofill="no"
+                android:maxLength="1"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:textColorHint="#8FFFFFFF"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/dig10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/textoCima"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/textoCima"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/cl_cpf_generator_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_cpf_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_cpf_generator_image">
+
+        <Button
+            android:id="@+id/btnGera"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/btngerar"
+            android:text="Gerar"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btSalvar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btSalvar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/btncopy"
+            android:text="COPIAR"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btlimp"
+            app:layout_constraintStart_toEndOf="@+id/btnGera"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btlimp"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/btnclear"
+            android:text="Limpar"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btSalvar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="OnClick" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_digitos_especificos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoBaixo">
+
+        <include
+            android:id="@+id/btn3"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="2dp"
+            layout="@layout/progress_btn_layout3"
+            app:layout_constraintEnd_toStartOf="@+id/btn5"
+            app:layout_constraintStart_toEndOf="@+id/btn1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/btn5"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="2dp"
+            layout="@layout/progress_btn_layout5"
+            app:layout_constraintEnd_toStartOf="@+id/btn6"
+            app:layout_constraintStart_toEndOf="@+id/btn3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/btn6"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="2dp"
+            layout="@layout/progress_btn_layout6"
+            app:layout_constraintEnd_toStartOf="@+id/btn9"
+            app:layout_constraintStart_toEndOf="@+id/btn5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/btn9"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            layout="@layout/progress_btn_layout9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn6"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/btn1"
+            layout="@layout/progress_btn_layout"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textoBaixo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/textoBaixo"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/cl_cpf_buttons"
+        tools:layout_editor_absoluteX="1dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

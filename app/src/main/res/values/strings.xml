@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CPF Gen</string>
+    <string name="btn1">1</string>
+    <string name="btn3">3</string>
+    <string name="btn5">5</string>
+    <string name="btn6">6</string>
+    <string name="btn9">9</string>
+    <string name="digit_hint">0</string>
+    <string name="digit_hint2">X</string>
+    <string name="textoCima">Para gerar um CPF toque no botão GERAR ou insira 9 dígitos para validar um CPF</string>
+    <string name="textoBaixo">Escolha um número para ser o final do CPF</string>
+</resources>
