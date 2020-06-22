@@ -89,19 +89,18 @@ public class GeradorActivity extends AppCompatActivity {
 
         // Criando o AdView.
         adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-        adView.setAdSize(AdSize.BANNER);
 
-        // Recuperando o layout onde o anúncio vai ser exibido
-       //LinearLayout layout = findViewById(R.id.);
+        //sample ca-app-pub-3940256099942544/6300978111
+        adView.setAdUnitId("buttonsca-app-pub-8766426329693423/4165723218");
+        adView.setAdSize(AdSize.BANNER);
 
         // Adicionando o AdView no layout.
         //layout.addView(adView);
         adView = findViewById(R.id.adView);
 
         // Fazendo uma requisição para recuperar o anúncio.
-        //AdRequest adRequest = new AdRequest.Builder().build();
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("398A53E7F5828012").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+       //AdRequest adRequest = new AdRequest.Builder().addTestDevice("398A53E7F5828012").build();
 
         // Adicionando a requisição no AdView.
         adView.loadAd(adRequest);
@@ -348,7 +347,7 @@ public class GeradorActivity extends AppCompatActivity {
                         }, 10);
 
                         gerarCPF();
-                        while (!digito11.getText().toString().equals("6")) {
+                        while (!digito11.getText().toString().equals("7")) {
                             gerarCPF();
                         }
 
@@ -466,8 +465,8 @@ public class GeradorActivity extends AppCompatActivity {
                         dig1 == 6 && dig2 == 6 && dig3 == 6 && dig4 == 6 && dig5 == 6 && dig6 == 6 && dig7 == 6 && dig8 == 6 && dig9 == 6 ||
                         dig1 == 7 && dig2 == 7 && dig3 == 7 && dig4 == 7 && dig5 == 7 && dig6 == 7 && dig7 == 7 && dig8 == 7 && dig9 == 7 ||
                         dig1 == 8 && dig2 == 8 && dig3 == 8 && dig4 == 8 && dig5 == 8 && dig6 == 8 && dig7 == 8 && dig8 == 8 && dig9 == 8 ||
-                        dig1 == 9 && dig2 == 9 && dig3 == 9 && dig4 == 9 && dig5 == 9 && dig6 == 9 && dig7 == 9 && dig8 == 9 && dig9 == 9
-
+                        dig1 == 9 && dig2 == 9 && dig3 == 9 && dig4 == 9 && dig5 == 9 && dig6 == 9 && dig7 == 9 && dig8 == 9 && dig9 == 9 ||
+                        dig1 == 0 && dig2 == 0 && dig3 == 0 && dig4 == 0 && dig5 == 0 && dig6 == 0 && dig7 == 0 && dig8 == 0 && dig9 == 0
         ) {
             Toast.makeText(this, "CPF não é válido", Toast.LENGTH_SHORT).show();
         }
