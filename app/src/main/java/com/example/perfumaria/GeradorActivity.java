@@ -1,12 +1,14 @@
 package com.example.perfumaria;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,10 +16,20 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.util.Random;
+
+import static java.security.AccessController.getContext;
 
 public class GeradorActivity extends AppCompatActivity {
 
@@ -44,6 +56,7 @@ public class GeradorActivity extends AppCompatActivity {
     private View btn5;
     private View btn6;
     private View btn9;
+    private AdView adView;
 
 
     int dig1;
@@ -64,6 +77,59 @@ public class GeradorActivity extends AppCompatActivity {
         init();
         keyboardOpen();
         digito1.requestFocus();
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+       // AdRequest adRequest = new AdRequest.Builder().build();
+        //AdView.loadAd(adRequest);
+
+        // Criando o AdView.
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView.setAdSize(AdSize.BANNER);
+
+        // Recuperando o layout onde o anúncio vai ser exibido
+       //LinearLayout layout = findViewById(R.id.);
+
+        // Adicionando o AdView no layout.
+        //layout.addView(adView);
+        adView = findViewById(R.id.adView);
+
+        // Fazendo uma requisição para recuperar o anúncio.
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("398A53E7F5828012").build();
+
+        // Adicionando a requisição no AdView.
+        adView.loadAd(adRequest);
+
+
+    }
+
+
+
+    @Override
+    protected void onPause() {
+        //Pausando o AdView ao pausar a activity
+        adView.pause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Resumindo o AdView ao resumir a activity
+        adView.resume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        //Destruindo o AdView ao destruir a activity
+        adView.destroy();
+        super.onDestroy();
     }
 
     public void keyboardOpen() {
@@ -92,6 +158,7 @@ public class GeradorActivity extends AppCompatActivity {
         btn5 = findViewById(R.id.btn5);
         btn6 = findViewById(R.id.btn6);
         btn9 = findViewById(R.id.btn9);
+        adView = findViewById(R.id.adView);
 
     }
 
