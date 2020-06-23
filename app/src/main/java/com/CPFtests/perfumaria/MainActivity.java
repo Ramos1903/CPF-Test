@@ -1,4 +1,4 @@
-package com.example.perfumaria;
+package com.CPFtests.perfumaria;
 
 import androidx.appcompat.app.AppCompatActivity;
 

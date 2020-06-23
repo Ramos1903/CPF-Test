@@ -1,4 +1,4 @@
-package com.example.perfumaria;
+package com.CPFtests.perfumaria;
 
 import android.content.Context;
 import android.os.Handler;

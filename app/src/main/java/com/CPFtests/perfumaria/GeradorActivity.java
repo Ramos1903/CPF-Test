@@ -1,22 +1,18 @@
-package com.example.perfumaria;
+package com.CPFtests.perfumaria;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +24,6 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.Random;
-
-import static java.security.AccessController.getContext;
 
 public class GeradorActivity extends AppCompatActivity {
 
@@ -91,7 +85,7 @@ public class GeradorActivity extends AppCompatActivity {
         adView = new AdView(this);
 
         //sample ca-app-pub-3940256099942544/6300978111
-        adView.setAdUnitId("buttonsca-app-pub-8766426329693423/4165723218");
+        adView.setAdUnitId("ca-app-pub-8766426329693423/4165723218");
         adView.setAdSize(AdSize.BANNER);
 
         // Adicionando o AdView no layout.

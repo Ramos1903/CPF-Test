@@ -1,4 +1,4 @@
-package com.example.perfumaria;
+package com.CPFtests.perfumaria;
 
 import org.junit.Test;
 
