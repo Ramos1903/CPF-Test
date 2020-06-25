@@ -32,7 +32,7 @@ class ProgressButton {
     void buttonActivated() {
         progressBar.setAnimation(fade_in);
         textView.setAnimation(fade_in);
-        progressBar.setVisibility(cardView.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     void buttonFinished() {

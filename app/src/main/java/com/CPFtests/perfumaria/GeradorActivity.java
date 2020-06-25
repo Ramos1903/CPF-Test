@@ -50,7 +50,7 @@ public class GeradorActivity extends AppCompatActivity {
     private View btn5;
     private View btn6;
     private View btn9;
-    private AdView adView;
+    public AdView adView;
 
 
     int dig1;
@@ -67,10 +67,6 @@ public class GeradorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_gerador);
-        bind();
-        init();
-        keyboardOpen();
-        digito1.requestFocus();
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -78,27 +74,21 @@ public class GeradorActivity extends AppCompatActivity {
             }
         });
 
-       // AdRequest adRequest = new AdRequest.Builder().build();
-        //AdView.loadAd(adRequest);
+        bind();
+        init();
+        keyboardOpen();
+        digito1.requestFocus();
 
-        // Criando o AdView.
-        adView = new AdView(this);
+
 
         //sample ca-app-pub-3940256099942544/6300978111
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.LARGE_BANNER);
         adView.setAdUnitId("ca-app-pub-8766426329693423/4165723218");
-        adView.setAdSize(AdSize.BANNER);
 
-        // Adicionando o AdView no layout.
-        //layout.addView(adView);
         adView = findViewById(R.id.adView);
-
-        // Fazendo uma requisição para recuperar o anúncio.
         AdRequest adRequest = new AdRequest.Builder().build();
-       //AdRequest adRequest = new AdRequest.Builder().addTestDevice("398A53E7F5828012").build();
-
-        // Adicionando a requisição no AdView.
         adView.loadAd(adRequest);
-
 
     }
 
@@ -115,7 +105,7 @@ public class GeradorActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //Resumindo o AdView ao resumir a activity
-        adView.resume();
+        //adView.resume();
     }
 
     @Override
@@ -151,7 +141,6 @@ public class GeradorActivity extends AppCompatActivity {
         btn5 = findViewById(R.id.btn5);
         btn6 = findViewById(R.id.btn6);
         btn9 = findViewById(R.id.btn9);
-        adView = findViewById(R.id.adView);
 
     }
 
