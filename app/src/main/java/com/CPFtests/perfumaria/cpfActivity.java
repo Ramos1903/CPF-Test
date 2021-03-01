@@ -219,7 +219,6 @@ public class cpfActivity extends AppCompatActivity {
         digito9.addTextChangedListener(new DigitTextWatch(digito9));
         digito1.requestFocus();
 
-
         btGerar.setOnClickListener(new View.OnClickListener() { // on click func to gen new cpf
             @Override
             public void onClick(View v) {
@@ -380,7 +379,10 @@ public class cpfActivity extends AppCompatActivity {
                                 toastRed.setView(layout);
                                 toastRed.show();
 
+                                btn3.setClickable(false);
+
                             } else {
+                                btn3.setClickable(true);
                                 btn3.callOnClick();
                             }
 
@@ -399,7 +401,7 @@ public class cpfActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (numberChanged != null) {
+                if (numberChanged != null && numberChanged.trim() != null) {
 
                     final ProgressButton progressButton3 = new ProgressButton(cpfActivity.this, btn3);
 
@@ -425,7 +427,7 @@ public class cpfActivity extends AppCompatActivity {
                             }, 10);
 
                             genCpf();
-                            while (!digito11.getText().toString().equals(numberChanged)) {
+                            while (!digito11.getText().toString().equals(numberChanged.trim())) {
                                 genCpf();
                             }
 

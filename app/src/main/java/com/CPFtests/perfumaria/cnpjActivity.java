@@ -391,7 +391,10 @@ public class cnpjActivity extends AppCompatActivity {
                                     toastRed.setView(layout);
                                     toastRed.show();
 
+                                    btn3.setClickable(false);
+
                                 } else {
+                                    btn3.setClickable(true);
                                     btn3.callOnClick();
                                 }
 
@@ -411,7 +414,7 @@ public class cnpjActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    if (numberChanged2 != null && numberChanged2 != null){
+                    if (numberChanged2 != null && numberChanged2.trim() != null){
 
                     final ProgressButton progressButton3 = new ProgressButton(cnpjActivity.this, btn3);
 
