@@ -1,12 +1,16 @@
 <resources>
-    <string name="app_name">CPF Validator</string>
+    <string name="app_name">Validator and Generator</string>
     <string name="btn1">1</string>
-    <string name="btn3">3</string>
+    <string name="btn3">X</string>
     <string name="btn5">5</string>
     <string name="btn7">7</string>
     <string name="btn9">9</string>
     <string name="digit_hint">0</string>
     <string name="digit_hint2">X</string>
-    <string name="textoCima">Para gerar um CPF toque no botão GERAR ou insira 9 dígitos para validar um CPF</string>
-    <string name="textoBaixo">Escolha um número para ser o final do CPF</string>
+    <string name="textoCima">Para gerar um CNPJ toque no botão GERAR ou insira 9 dígitos para validar um CNPJ</string>
+    <string name="textoBaixo">Escolha um número final no CNPJ</string>
+    <string name="textoCimaCpf">Para gerar um CPF toque no botão GERAR ou insira 9 dígitos para validar um CPF</string>
+    <string name="textoBaixoCpf">Escolha um número final no CPF</string>
+    <string name="title_activity_cnpj">cnpjActivity</string>
+
 </resources>

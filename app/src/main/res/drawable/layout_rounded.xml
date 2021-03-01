@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    >
+
+    <!-- Background color -->
+    <solid android:color="#3A22E5" />
+
+    <!-- The corners of the shape -->
+    <corners android:radius="20dp"/>
+
+</shape>

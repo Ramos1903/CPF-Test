@@ -1,18 +1,31 @@
 package com.CPFtests.perfumaria;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +38,9 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import java.util.Random;
 
-public class GeradorActivity extends AppCompatActivity {
+import static android.widget.Toast.makeText;
+
+public class cpfActivity extends AppCompatActivity {
 
     private EditText digito1;
     private EditText digito2;
@@ -43,15 +58,21 @@ public class GeradorActivity extends AppCompatActivity {
 
     private Button btGerar;
     private Button btClear;
-    private Button copy;
 
     private View btn1;
     private View btn3;
     private View btn5;
-    private View btn6;
-    private View btn9;
+
     public AdView adView;
 
+    private ImageView copyIcon;
+    private ImageView editIcon;
+    private ImageView cancelNumberChanger;
+    private EditText numberChanger;
+    private ConstraintLayout background;
+    private String numberChanged;
+
+    Intent intent;
 
     int dig1;
     int dig2;
@@ -63,10 +84,51 @@ public class GeradorActivity extends AppCompatActivity {
     int dig8;
     int dig9;
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        closeKeyboard();
+        finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menuitems, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.cpficon:
+                cpfIntent();
+                return true;
+
+            case R.id.cnpjicon:
+                cnpjIntent();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void cnpjIntent(){
+        intent = new Intent(cpfActivity.this, cnpjActivity.class);
+        startActivity(intent);
+    }
+
+    public void cpfIntent(){
+        //already here
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_gerador);
+        setContentView(R.layout.activity_cpf);
+
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -79,8 +141,6 @@ public class GeradorActivity extends AppCompatActivity {
         keyboardOpen();
         digito1.requestFocus();
 
-
-
         //sample ca-app-pub-3940256099942544/6300978111
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.LARGE_BANNER);
@@ -92,8 +152,8 @@ public class GeradorActivity extends AppCompatActivity {
 
     }
 
-
-
+/*
+ //this was making ads crash
     @Override
     protected void onPause() {
         //Pausando o AdView ao pausar a activity
@@ -101,27 +161,28 @@ public class GeradorActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    */
+
     @Override
     protected void onResume() {
         super.onResume();
-        //Resumindo o AdView ao resumir a activity
+        //Resume Adview
         //adView.resume();
     }
 
     @Override
     protected void onDestroy() {
-        //Destruindo o AdView ao destruir a activity
+        //destroy ads from the view
         adView.destroy();
         super.onDestroy();
     }
 
     public void keyboardOpen() {
-
         InputMethodManager inm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inm.toggleSoftInput(InputMethodManager.RESULT_SHOWN, 0);
     }
 
-    private void bind() {
+    private void bind() { //bind digitos to the proper view
         digito1 = findViewById(R.id.dig1);
         digito2 = findViewById(R.id.dig2);
         digito3 = findViewById(R.id.dig3);
@@ -135,16 +196,17 @@ public class GeradorActivity extends AppCompatActivity {
         digito11 = findViewById(R.id.dig11);
         btClear = findViewById(R.id.btlimp);
         btGerar = findViewById(R.id.btnGera);
-        copy = findViewById(R.id.btSalvar);
+        copyIcon = findViewById(R.id.copyicon);
+        editIcon = findViewById(R.id.editIcon);
+        numberChanger = findViewById(R.id.numberChanger);
         btn1 = findViewById(R.id.btn1);
         btn3 = findViewById(R.id.btn3);
         btn5 = findViewById(R.id.btn5);
-        btn6 = findViewById(R.id.btn6);
-        btn9 = findViewById(R.id.btn9);
-
+        background = findViewById(R.id.background2);
+        cancelNumberChanger = findViewById(R.id.cancelNumberChanger);
     }
 
-    private void init() {
+    private void init() { // create listeners for each view
         digitos = new EditText[]{digito1, digito2, digito3, digito4, digito5, digito6, digito7, digito8, digito9};
         digito1.addTextChangedListener(new DigitTextWatch(digito1));
         digito2.addTextChangedListener(new DigitTextWatch(digito2));
@@ -158,32 +220,74 @@ public class GeradorActivity extends AppCompatActivity {
         digito1.requestFocus();
 
 
-        btGerar.setOnClickListener(new View.OnClickListener() {
+        btGerar.setOnClickListener(new View.OnClickListener() { // on click func to gen new cpf
             @Override
             public void onClick(View v) {
-                gerarCPF();
+                genCpf();
+
             }
         });
 
-        btClear.setOnClickListener(new View.OnClickListener() {
+        btClear.setOnClickListener(new View.OnClickListener() { //clear all the digits
             @Override
             public void onClick(View v) {
-                limparCamposCPF();
+                clearCpf();
             }
         });
 
-        copy.setOnClickListener(new View.OnClickListener() {
+        copyIcon.setOnClickListener(new View.OnClickListener() { //copy all the digits to clipboard
             @Override
             public void onClick(View v) {
-                copia();
+
+                copyIcon.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+                copytoClip();
+
                 if (digito1.getText().toString().isEmpty() || digito2.getText().toString().isEmpty() || digito3.getText().toString().isEmpty() || digito4.getText().toString().isEmpty()
                         || digito5.getText().toString().isEmpty() || digito6.getText().toString().isEmpty() || digito7.getText().toString().isEmpty() || digito8.getText().toString().isEmpty() || digito9.getText().toString().isEmpty() ) {
 
-                    Toast.makeText(GeradorActivity.this, "Insira um CPF válido para copiar", Toast.LENGTH_SHORT).show();
+                    copyIcon.clearColorFilter();
+
+                    LayoutInflater inflater = getLayoutInflater(); //custom toast
+                    View layout = inflater.inflate(R.layout.toast_layout_red,
+                            (ViewGroup) findViewById(R.id.toast_layout_root));
+
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+                    text.setText("Insira um CPF valido");
+
+                    Toast toastRed = new Toast(getApplicationContext());
+                    toastRed.setGravity(Gravity.BOTTOM, 0, 0);
+                    toastRed.setDuration(Toast.LENGTH_SHORT);
+                    toastRed.setView(layout);
+                    toastRed.show();
+
                 }
                 else{
 
-                    Toast.makeText(GeradorActivity.this, "CPF copiado", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(cpfActivity.this, "CPF copiado", Toast.LENGTH_SHORT).show();
+
+                    LayoutInflater inflater = getLayoutInflater(); //custom toast
+                    View layout = inflater.inflate(R.layout.toast_layout,
+                            (ViewGroup) findViewById(R.id.toast_layout_root));
+
+
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+                    text.setText("CPF copiado");
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.BOTTOM, 0, 0);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
+
+
+                    Handler handlericon = new Handler();
+                    handlericon.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            copyIcon.clearColorFilter();
+                        }
+                    },700);
+
                 }
             }
         });
@@ -192,7 +296,7 @@ public class GeradorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final ProgressButton progressButton1 = new ProgressButton(GeradorActivity.this, btn1);
+                final ProgressButton progressButton1 = new ProgressButton(cpfActivity.this, btn1);
 
                 progressButton1.buttonActivated();
                 final Handler handler = new Handler();
@@ -215,13 +319,78 @@ public class GeradorActivity extends AppCompatActivity {
                             }
                         }, 10);
 
-                        gerarCPF();
+                        genCpf();
                         while (!digito11.getText().toString().equals("1")) {
-                            gerarCPF();
+                            genCpf();
                         }
 
                     }
                 }, 160);
+            }
+        });
+
+        cancelNumberChanger.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+        cancelNumberChanger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numberChanger.setVisibility(View.GONE);
+                cancelNumberChanger.setVisibility(View.GONE);
+                closeKeyboard();
+                background.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        editIcon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        editIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                background.setVisibility(View.GONE);
+
+                numberChanger.setVisibility(View.VISIBLE);
+                cancelNumberChanger.setVisibility(View.VISIBLE);
+                numberChanger.requestFocus();
+                closeKeyboard();
+                keyboardOpen();
+
+
+                numberChanger.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+
+                        if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (i == KeyEvent.KEYCODE_ENTER)) {
+                            // Perform action on key press
+
+                            numberChanged = numberChanger.getText().toString().trim();
+
+                            if ( numberChanger.getText().toString().isEmpty()){
+
+                                LayoutInflater inflater = getLayoutInflater(); //custom toast
+                                View layout = inflater.inflate(R.layout.toast_layout_red,
+                                        (ViewGroup) findViewById(R.id.toast_layout_root));
+
+                                TextView text = (TextView) layout.findViewById(R.id.text);
+                                text.setText("Insira um número ");
+
+                                Toast toastRed = new Toast(getApplicationContext());
+                                toastRed.setGravity(Gravity.BOTTOM, 0, 0);
+                                toastRed.setDuration(Toast.LENGTH_SHORT);
+                                toastRed.setView(layout);
+                                toastRed.show();
+
+                            } else {
+                                btn3.callOnClick();
+                            }
+
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
             }
         });
 
@@ -230,36 +399,59 @@ public class GeradorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final ProgressButton progressButton3 = new ProgressButton(GeradorActivity.this, btn3);
+                if (numberChanged != null) {
 
-                progressButton3.buttonActivated();
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    final ProgressButton progressButton3 = new ProgressButton(cpfActivity.this, btn3);
 
-                        Handler handle1 = new Handler();
-                        handler.postDelayed(new Runnable() {
+                    progressButton3.buttonActivated();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                            @Override
-                            public void run() {
+                            Handler handle1 = new Handler();
+                            handler.postDelayed(new Runnable() {
 
-                                Handler handle2 = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        progressButton3.buttonFinished();
-                                    }
-                                },100);
+                                @Override
+                                public void run() {
+
+                                    Handler handle2 = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            progressButton3.buttonFinished();
+                                        }
+                                    }, 100);
+                                }
+                            }, 10);
+
+                            genCpf();
+                            while (!digito11.getText().toString().equals(numberChanged)) {
+                                genCpf();
                             }
-                        }, 10);
 
-                        gerarCPF();
-                        while (!digito11.getText().toString().equals("3")) {
-                            gerarCPF();
                         }
+                    }, 160);
 
-                    }
-                }, 160);
+                    numberChanger.setVisibility(View.GONE);
+                    closeKeyboard();
+                    background.setVisibility(View.VISIBLE);
+                    cancelNumberChanger.setVisibility(View.GONE);
+
+                } else {
+
+                    LayoutInflater inflater = getLayoutInflater(); //custom toast
+                    View layout = inflater.inflate(R.layout.toast_layout_red,
+                            (ViewGroup) findViewById(R.id.toast_layout_root));
+
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+                    text.setText("Insira número valido");
+
+                    Toast toastRed = new Toast(getApplicationContext());
+                    toastRed.setGravity(Gravity.BOTTOM, 0, 0);
+                    toastRed.setDuration(Toast.LENGTH_SHORT);
+                    toastRed.setView(layout);
+                    toastRed.show();
+                }
 
             }
         });
@@ -268,7 +460,7 @@ public class GeradorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final ProgressButton progressButton5 = new ProgressButton(GeradorActivity.this, btn5);
+                final ProgressButton progressButton5 = new ProgressButton(cpfActivity.this, btn5);
 
                 progressButton5.buttonActivated();
                 final Handler handler = new Handler();
@@ -291,85 +483,9 @@ public class GeradorActivity extends AppCompatActivity {
                             }
                         }, 10);
 
-                        gerarCPF();
+                        genCpf();
                         while (!digito11.getText().toString().equals("5")) {
-                            gerarCPF();
-                        }
-
-                    }
-                }, 160);
-
-            }
-        });
-
-        btn6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final ProgressButton progressButton6 = new ProgressButton(GeradorActivity.this, btn6);
-
-                progressButton6.buttonActivated();
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        Handler handle1 = new Handler();
-                        handler.postDelayed(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                Handler handle2 = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        progressButton6.buttonFinished();
-                                    }
-                                },100);
-                            }
-                        }, 10);
-
-                        gerarCPF();
-                        while (!digito11.getText().toString().equals("7")) {
-                            gerarCPF();
-                        }
-
-                    }
-                }, 160);
-
-            }
-        });
-
-        btn9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final ProgressButton progressButton9 = new ProgressButton(GeradorActivity.this, btn9);
-
-                progressButton9.buttonActivated();
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        Handler handle1 = new Handler();
-                        handler.postDelayed(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                Handler handle2 = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        progressButton9.buttonFinished();
-                                    }
-                                },100);
-                            }
-                        }, 10);
-
-                        gerarCPF();
-                        while (!digito11.getText().toString().equals("9")) {
-                            gerarCPF();
+                            genCpf();
                         }
 
                     }
@@ -394,7 +510,7 @@ public class GeradorActivity extends AppCompatActivity {
 
     }
 
-    public void gerarCPF() {
+    public void genCpf() {
         random();
         digito1.setText(Integer.toString(dig1));
         digito2.setText(Integer.toString(dig2));
@@ -411,7 +527,7 @@ public class GeradorActivity extends AppCompatActivity {
         closeKeyboard();
     }
 
-    private void pegarDigitosFinais() {
+    private void getFinalDigts() {
 
         int dig1 = Integer.parseInt(digito1.getText().toString());
         int dig2 = Integer.parseInt(digito2.getText().toString());
@@ -451,21 +567,21 @@ public class GeradorActivity extends AppCompatActivity {
                         dig1 == 9 && dig2 == 9 && dig3 == 9 && dig4 == 9 && dig5 == 9 && dig6 == 9 && dig7 == 9 && dig8 == 9 && dig9 == 9 ||
                         dig1 == 0 && dig2 == 0 && dig3 == 0 && dig4 == 0 && dig5 == 0 && dig6 == 0 && dig7 == 0 && dig8 == 0 && dig9 == 0
         ) {
-            Toast.makeText(this, "CPF não é válido", Toast.LENGTH_SHORT).show();
+            makeText(this, "CPF não é válido", Toast.LENGTH_SHORT).show();
         }
         else {
-           // Toast.makeText(this, "CPF válido", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "CPF válido", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private void verificadorCampos(EditText[] digitos) {
+    private void verifDigts(EditText[] digitos) {
         for (EditText digito : digitos) {
             if (digito.getText().toString().length() <= 0) {
                 return;
             }
         }
-        pegarDigitosFinais();
+        getFinalDigts();
     }
 
     private void closeKeyboard() {
@@ -473,20 +589,20 @@ public class GeradorActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(digito9.getWindowToken(), 0);
     }
 
-    public void copia(){
+    public void copytoClip(){
 
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("text",
                 digito1.getText() + "" + digito2.getText() + "" + digito3.getText() + "." +
                         digito4.getText() + "" + digito5.getText() + "" + digito6.getText() + "." +
-                digito7.getText() + "" + digito8.getText() + "" + digito9.getText() +
-                "-" + digito10.getText() + "" + digito11.getText());
+                        digito7.getText() + "" + digito8.getText() + "" + digito9.getText() +
+                        "-" + digito10.getText() + "" + digito11.getText());
         clipboard.setPrimaryClip(clip);
 
     }
 
 
-    public void limparCamposCPF() {
+    public void clearCpf() {
         digito1.setText("");
         digito2.setText("");
         digito3.setText("");
@@ -498,14 +614,11 @@ public class GeradorActivity extends AppCompatActivity {
         digito9.setText("");
         digito10.setText("");
         digito11.setText("");
+
         digito1.requestFocus();
-
-        InputMethodManager inm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-       inm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-
+        digito1.clearFocus();
+        closeKeyboard();
     }
-
-
 
     private class DigitTextWatch implements TextWatcher {
 
@@ -523,7 +636,7 @@ public class GeradorActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            verificadorCampos(digitos);
+            verifDigts(digitos);
 
             String text = s.toString();
 
@@ -578,7 +691,7 @@ public class GeradorActivity extends AppCompatActivity {
                     }
                     break;
             }
-        }
+        } //move to another dig
 
 
         @Override
@@ -632,7 +745,7 @@ public class GeradorActivity extends AppCompatActivity {
             }
 
 
-        }
+        } //move to another dig
     }
 }
 

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class MainActivity extends AppCompatActivity implements Runnable {
+public class logoActivity extends AppCompatActivity implements Runnable {
 
 
     @Override
@@ -19,9 +19,8 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
     @Override
     public void run() {
-        startActivity(new Intent(this, GeradorActivity.class));
+        startActivity(new Intent(this, cpfActivity.class));
         finish();
     }
 
 }
-

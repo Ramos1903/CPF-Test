@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toast_layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/green"
+    android:orientation="horizontal"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:visibility="visible"
+        />
+
+</LinearLayout>
