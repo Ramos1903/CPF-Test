@@ -61,7 +61,7 @@ public class cpfActivity extends AppCompatActivity {
 
     private View btn1;
     private View btn3;
-    private View btn5;
+    private View btn9;
 
     public AdView adView;
 
@@ -201,7 +201,7 @@ public class cpfActivity extends AppCompatActivity {
         numberChanger = findViewById(R.id.numberChanger);
         btn1 = findViewById(R.id.btn1);
         btn3 = findViewById(R.id.btn3);
-        btn5 = findViewById(R.id.btn5);
+        btn9 = findViewById(R.id.btn9);
         background = findViewById(R.id.background2);
         cancelNumberChanger = findViewById(R.id.cancelNumberChanger);
     }
@@ -458,11 +458,11 @@ public class cpfActivity extends AppCompatActivity {
             }
         });
 
-        btn5.setOnClickListener(new View.OnClickListener() {
+        btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final ProgressButton progressButton5 = new ProgressButton(cpfActivity.this, btn5);
+                final ProgressButton progressButton5 = new ProgressButton(cpfActivity.this, btn9);
 
                 progressButton5.buttonActivated();
                 final Handler handler = new Handler();
@@ -486,7 +486,7 @@ public class cpfActivity extends AppCompatActivity {
                         }, 10);
 
                         genCpf();
-                        while (!digito11.getText().toString().equals("5")) {
+                        while (!digito11.getText().toString().equals("9")) {
                             genCpf();
                         }
 

@@ -61,7 +61,7 @@ public class cnpjActivity extends AppCompatActivity {
 
         private View btn1;
         private View btn3;
-        private View btn5;
+        private View btn9;
 
         public AdView adView2;
 
@@ -183,7 +183,7 @@ public class cnpjActivity extends AppCompatActivity {
             copyIcon = findViewById(R.id.copyicon);
             btn1 = findViewById(R.id.btn1);
             btn3 = findViewById(R.id.btn3);
-            btn5 = findViewById(R.id.btn5);
+            btn9 = findViewById(R.id.btn9);
             editIcon2 = findViewById(R.id.editIcon2);
             cancelNumberChanger2 = findViewById(R.id.cancelNumberChanger2);
             numberChanger2 = findViewById(R.id.numberChanger2);
@@ -471,11 +471,11 @@ public class cnpjActivity extends AppCompatActivity {
                 }
             });
 
-            btn5.setOnClickListener(new View.OnClickListener() {
+            btn9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    final ProgressButton progressButton5 = new ProgressButton(cnpjActivity.this, btn5);
+                    final ProgressButton progressButton5 = new ProgressButton(cnpjActivity.this, btn9);
 
                     progressButton5.buttonActivated();
                     final Handler handler = new Handler();
@@ -499,7 +499,7 @@ public class cnpjActivity extends AppCompatActivity {
                             }, 10);
 
                             genCpf();
-                            while (!digito14.getText().toString().equals("5")) {
+                            while (!digito14.getText().toString().equals("9")) {
                                 genCpf();
                             }
 
