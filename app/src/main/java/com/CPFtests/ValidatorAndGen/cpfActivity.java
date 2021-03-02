@@ -142,18 +142,20 @@ public class cpfActivity extends AppCompatActivity {
         keyboardOpen();
         digito1.requestFocus();
 
+        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         //sample ca-app-pub-3940256099942544/6300978111
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.LARGE_BANNER);
         adView.setAdUnitId("ca-app-pub-8766426329693423/4165723218");
 
-        adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+
 
     }
 
-/*
+
  //this was making ads crash
     @Override
     protected void onPause() {
@@ -162,13 +164,13 @@ public class cpfActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    */
+
 
     @Override
     protected void onResume() {
         super.onResume();
         //Resume Adview
-        //adView.resume();
+        adView.resume();
     }
 
     @Override

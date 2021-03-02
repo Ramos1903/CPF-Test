@@ -423,8 +423,7 @@
             app:adUnitId="ca-app-pub-8766426329693423/4165723218"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/validatorcard"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@+id/validatorcard" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

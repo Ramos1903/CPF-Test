@@ -133,28 +133,37 @@ public class cnpjActivity extends AppCompatActivity {
             keyboardOpen();
             digito1.requestFocus();
 
+            adView2 = findViewById(R.id.adView2);
+            AdRequest adRequest2 = new AdRequest.Builder().build();
+            adView2.loadAd(adRequest2);
+
             //sample ca-app-pub-3940256099942544/6300978111
             AdView adView2 = new AdView(this);
             adView2.setAdSize(AdSize.LARGE_BANNER);
             adView2.setAdUnitId("ca-app-pub-8766426329693423/4165723218");
 
-            adView2 = findViewById(R.id.adView2);
-            AdRequest adRequest2 = new AdRequest.Builder().build();
-            adView2.loadAd(adRequest2);
 
         }
+
+    @Override
+    protected void onPause() {
+        //Pausando o AdView ao pausar a activity
+        adView2.pause();
+        super.onPause();
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         //Resume Adview
-        //adView.resume();
+        adView2.resume();
     }
 
     @Override
     protected void onDestroy() {
         //destroy ads from the view
-//        adView2.destroy();
+        adView2.destroy();
         super.onDestroy();
     }
 
