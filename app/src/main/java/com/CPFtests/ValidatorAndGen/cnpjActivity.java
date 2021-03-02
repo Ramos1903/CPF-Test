@@ -1,4 +1,4 @@
-package com.CPFtests.perfumaria;
+package com.CPFtests.ValidatorAndGen;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.CPFtests.perfumaria.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;

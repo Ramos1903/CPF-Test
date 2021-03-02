@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".logoActivity">
+    tools:context="com.CPFtests.ValidatorAndGen.logoActivity">
 
     <TextView
         android:id="@+id/cpftext"

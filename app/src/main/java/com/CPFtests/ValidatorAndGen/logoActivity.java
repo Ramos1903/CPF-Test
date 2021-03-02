@@ -1,10 +1,12 @@
-package com.CPFtests.perfumaria;
+package com.CPFtests.ValidatorAndGen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.CPFtests.perfumaria.R;
 
 public class logoActivity extends AppCompatActivity implements Runnable {
 

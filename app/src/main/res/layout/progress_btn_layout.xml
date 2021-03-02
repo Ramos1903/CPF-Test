@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="70dp"
     android:layout_height="60dp"
-    tools:context=".cpfActivity">
+    tools:context="com.CPFtests.ValidatorAndGen.cpfActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/btncopy"
-            tools:context=".cpfActivity">
+            tools:context="com.CPFtests.ValidatorAndGen.cpfActivity">
 
             <ProgressBar
                 android:id="@+id/progressBar"

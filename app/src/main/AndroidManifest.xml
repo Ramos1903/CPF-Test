@@ -22,19 +22,19 @@
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
-        <activity android:name="com.CPFtests.perfumaria.logoActivity">
+        <activity android:name="com.CPFtests.ValidatorAndGen.logoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.CPFtests.perfumaria.cpfActivity">
+        <activity android:name="com.CPFtests.ValidatorAndGen.cpfActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".cnpjActivity"/>
+        <activity android:name="com.CPFtests.ValidatorAndGen.cnpjActivity"/>
 
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>

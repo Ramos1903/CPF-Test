@@ -1,4 +1,4 @@
-package com.CPFtests.perfumaria;
+package com.CPFtests.ValidatorAndGen;
 
 import android.content.Context;
 import android.os.Handler;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.CPFtests.perfumaria.R;
 
 class ProgressButton {
 
