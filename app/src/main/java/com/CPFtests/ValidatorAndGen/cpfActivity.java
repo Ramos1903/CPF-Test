@@ -29,6 +29,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
 
 import com.CPFtests.perfumaria.R;
 import com.google.android.gms.ads.AdRequest;
@@ -37,6 +40,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import java.util.Random;
 
@@ -75,6 +79,7 @@ public class cpfActivity extends AppCompatActivity {
     public AdView adView;
 
     private ImageView copyIcon;
+    private RewardedVideoAd mAd;
 
     Intent intent;
 
@@ -140,6 +145,9 @@ public class cpfActivity extends AppCompatActivity {
             }
         });
 
+        MobileAds.initialize(getApplicationContext(),
+                getString(R.string.admob_app_id));
+
         bind();
         init();
         keyboardOpen();
@@ -148,11 +156,71 @@ public class cpfActivity extends AppCompatActivity {
         adView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-
-        //sample ca-app-pub-3940256099942544/6300978111
+        // sample ca-app-pub-3940256099942544/5224354917
+        // sample ca-app-pub-3940256099942544/6300978111
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.LARGE_BANNER);
+
         adView.setAdUnitId("ca-app-pub-8766426329693423/4165723218");
+
+        //video ad unit
+        //ca-app-pub-8766426329693423/6898377509
+        //app-id
+        //ca-app-pub-8766426329693423~7271765687
+
+        // Get reference to singleton RewardedVideoAd object
+        mAd = MobileAds.getRewardedVideoAdInstance(this);
+
+        mAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+            @Override
+            public void onRewardedVideoAdLoaded() {
+                Toast.makeText(getBaseContext(),
+                        "Ad loaded.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRewardedVideoAdOpened() {
+                Toast.makeText(getBaseContext(),
+                        "Ad opened.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRewardedVideoStarted() {
+                Toast.makeText(getBaseContext(),
+                        "Ad started.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRewardedVideoAdClosed() {
+                Toast.makeText(getBaseContext(),
+                        "Ad closed.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRewarded(RewardItem rewardItem) {
+                Toast.makeText(getBaseContext(),
+                        "Ad triggered reward.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRewardedVideoAdLeftApplication() {
+                Toast.makeText(getBaseContext(),
+                        "Ad left application.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRewardedVideoAdFailedToLoad(int i) {
+                Toast.makeText(getBaseContext(),
+                        "Ad failed to load.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRewardedVideoCompleted() {
+
+            }
+
+        });
+
 
     }
 
@@ -161,6 +229,7 @@ public class cpfActivity extends AppCompatActivity {
     protected void onPause() {
         //Pausando o AdView ao pausar a activity
         adView.pause();
+        mAd.pause(this);
         super.onPause();
     }
 
@@ -169,12 +238,14 @@ public class cpfActivity extends AppCompatActivity {
         super.onResume();
         //Resume Adview
         adView.resume();
+        mAd.resume(this);
     }
 
     @Override
     protected void onDestroy() {
         //destroy ads from the view
         adView.destroy();
+        mAd.destroy();
         super.onDestroy();
     }
 
@@ -298,6 +369,13 @@ public class cpfActivity extends AppCompatActivity {
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //starta a recompensa
+                mAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
+
+                if (mAd.isLoaded()) {
+                    mAd.show();
+                }
 
                 final ProgressButton progressButton0 = new ProgressButton(cpfActivity.this, btn0);
 

@@ -17,5 +17,7 @@
     <string name="textoCimaCpf">Para gerar um CPF toque no botão GERAR ou insira 9 dígitos para validar um CPF</string>
     <string name="textoBaixoCpf">Escolha um número final no CPF</string>
     <string name="title_activity_cnpj">cnpjActivity</string>
+    <string name="ad_unit_id">ca-app-pub-8766426329693423/6898377509</string>
+    <string name="admob_app_id">ca-app-pub-8766426329693423~7271765687</string>
 
 </resources>
