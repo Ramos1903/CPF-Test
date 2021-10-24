@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/drawable/btn.xml" value="0.27291666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/drawable/btnclear.xml" value="0.27291666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/drawable/btncopy.xml" value="0.3828125" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/drawable/btngerar.xml" value="0.3828125" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout-small/activity_cnpj.xml" value="1.0" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/activity_cnpj.xml" value="0.5" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/activity_cpf.xml" value="0.5" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/activity_main_progress.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/content_cnpj.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout.xml" value="2.0" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout1.xml" value="0.9" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout2.xml" value="0.75" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout3.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout4.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout5.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout6.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout7.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout8.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/progress_btn_layout9.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/toast_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/CPFGen-master 23.05.2020/app/src/main/res/layout/toast_layout_red.xml" value="0.33229166666666665" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.36666666666666664" />
+      </ProjectState>
+    </option>
   </component>
 </project>

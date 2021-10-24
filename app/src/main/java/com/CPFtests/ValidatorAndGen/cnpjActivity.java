@@ -61,17 +61,18 @@ public class cnpjActivity extends AppCompatActivity {
         private Button btClear;
 
         private View btn1;
+        private View btn2;
         private View btn3;
+        private View btn4;
+        private View btn5;
+        private View btn6;
+        private View btn7;
+        private View btn8;
         private View btn9;
 
         public AdView adView2;
 
         private ImageView copyIcon;
-        private ImageView editIcon2;
-        private ImageView cancelNumberChanger2;
-        private EditText numberChanger2;
-        private ConstraintLayout background2;
-        private String numberChanged2;
 
         int dig1;
         int dig2;
@@ -140,7 +141,7 @@ public class cnpjActivity extends AppCompatActivity {
             //sample ca-app-pub-3940256099942544/6300978111
             AdView adView2 = new AdView(this);
             adView2.setAdSize(AdSize.LARGE_BANNER);
-            adView2.setAdUnitId("ca-app-pub-8766426329693423/4165723218");
+            adView2.setAdUnitId("ca-app-pub-8766426329693423/8766525776");
 
 
         }
@@ -192,12 +193,14 @@ public class cnpjActivity extends AppCompatActivity {
             btGerar = findViewById(R.id.btnGera);
             copyIcon = findViewById(R.id.copyicon);
             btn1 = findViewById(R.id.btn1);
+            btn2 = findViewById(R.id.btn2);
             btn3 = findViewById(R.id.btn3);
+            btn4 = findViewById(R.id.btn4);
+            btn5 = findViewById(R.id.btn5);
+            btn6 = findViewById(R.id.btn6);
+            btn7 = findViewById(R.id.btn7);
+            btn8 = findViewById(R.id.btn8);
             btn9 = findViewById(R.id.btn9);
-            editIcon2 = findViewById(R.id.editIcon2);
-            cancelNumberChanger2 = findViewById(R.id.cancelNumberChanger2);
-            numberChanger2 = findViewById(R.id.numberChanger2);
-            background2 = findViewById(R.id.background2);
 
         }
 
@@ -334,97 +337,46 @@ public class cnpjActivity extends AppCompatActivity {
                 }
             });
 
-
-
-            cancelNumberChanger2.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-            cancelNumberChanger2.setOnClickListener(new View.OnClickListener() {
+            btn2.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    numberChanger2.setVisibility(View.GONE);
-                    cancelNumberChanger2.setVisibility(View.GONE);
-                    closeKeyboard();
-                    background2.setVisibility(View.VISIBLE);
+                public void onClick(View v) {
 
-                }
-            });
+                    final ProgressButton progressButton2 = new ProgressButton(cnpjActivity.this, btn2);
 
-
-            editIcon2.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-            editIcon2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    background2.setVisibility(View.GONE);
-                    numberChanger2.setVisibility(View.VISIBLE);
-                    cancelNumberChanger2.setVisibility(View.VISIBLE);
-                    numberChanger2.requestFocus();
-                    closeKeyboard();
-                    keyboardOpen();
-
-
-                    numberChanger2.setOnKeyListener(new View.OnKeyListener() {
+                    progressButton2.buttonActivated();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
                         @Override
-                        public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        public void run() {
 
-                            if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
-                                    (i == KeyEvent.KEYCODE_ENTER)) {
-                                // Perform action on key press
-                                numberChanged2 = numberChanger2.getText().toString().trim();
+                            Handler handle1 = new Handler();
+                            handler.postDelayed(new Runnable() {
 
-                                if (numberChanged2.equals("0")) {
+                                @Override
+                                public void run() {
 
-                                    LayoutInflater inflater = getLayoutInflater(); //custom toast
-                                    View layout = inflater.inflate(R.layout.toast_layout_red,
-                                            (ViewGroup) findViewById(R.id.toast_layout_root));
-
-                                    TextView text = (TextView) layout.findViewById(R.id.text);
-                                    text.setText("Número inválido");
-
-                                    Toast toastRed = new Toast(getApplicationContext());
-                                    toastRed.setGravity(Gravity.BOTTOM, 0, 0);
-                                    toastRed.setDuration(Toast.LENGTH_SHORT);
-                                    toastRed.setView(layout);
-                                    toastRed.show();
-
-                                } else if (numberChanger2.getText().toString().isEmpty()) {
-
-                                    LayoutInflater inflater = getLayoutInflater(); //custom toast
-                                    View layout = inflater.inflate(R.layout.toast_layout_red,
-                                            (ViewGroup) findViewById(R.id.toast_layout_root));
-
-                                    TextView text = (TextView) layout.findViewById(R.id.text);
-                                    text.setText("Insira um número");
-
-                                    Toast toastRed = new Toast(getApplicationContext());
-                                    toastRed.setGravity(Gravity.BOTTOM, 0, 0);
-                                    toastRed.setDuration(Toast.LENGTH_SHORT);
-                                    toastRed.setView(layout);
-                                    toastRed.show();
-
-                                    btn3.setClickable(false);
-
-                                } else {
-                                    btn3.setClickable(true);
-                                    btn3.callOnClick();
+                                    Handler handle2 = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            progressButton2.buttonFinished();
+                                        }
+                                    },100);
                                 }
+                            }, 10);
 
-
-                                return true;
+                            genCpf();
+                            while (!digito14.getText().toString().equals("2")) {
+                                genCpf();
                             }
-                            return false;
+
                         }
-                    });
-
-
+                    }, 160);
                 }
             });
-
 
             btn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    if (numberChanged2 != null && numberChanged2.trim() != null){
 
                     final ProgressButton progressButton3 = new ProgressButton(cnpjActivity.this, btn3);
 
@@ -450,42 +402,57 @@ public class cnpjActivity extends AppCompatActivity {
                             }, 10);
 
                             genCpf();
-                            while (!digito14.getText().toString().equals(numberChanged2)) {
+                            while (!digito14.getText().toString().equals("3")) {
                                 genCpf();
                             }
 
                         }
                     }, 160);
-
-                    numberChanger2.setVisibility(View.GONE);
-                    closeKeyboard();
-                    background2.setVisibility(View.VISIBLE);
-                    cancelNumberChanger2.setVisibility(View.GONE);
-
-                } else {
-
-                    LayoutInflater inflater = getLayoutInflater(); //custom toast
-                    View layout = inflater.inflate(R.layout.toast_layout_red,
-                            (ViewGroup) findViewById(R.id.toast_layout_root));
-
-                    TextView text = (TextView) layout.findViewById(R.id.text);
-                    text.setText("Insira número valido");
-
-                    Toast toastRed = new Toast(getApplicationContext());
-                    toastRed.setGravity(Gravity.BOTTOM, 0, 0);
-                    toastRed.setDuration(Toast.LENGTH_SHORT);
-                    toastRed.setView(layout);
-                    toastRed.show();
-                }
-
                 }
             });
 
-            btn9.setOnClickListener(new View.OnClickListener() {
+            btn4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    final ProgressButton progressButton5 = new ProgressButton(cnpjActivity.this, btn9);
+                    final ProgressButton progressButton4 = new ProgressButton(cnpjActivity.this, btn4);
+
+                    progressButton4.buttonActivated();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Handler handle1 = new Handler();
+                            handler.postDelayed(new Runnable() {
+
+                                @Override
+                                public void run() {
+
+                                    Handler handle2 = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            progressButton4.buttonFinished();
+                                        }
+                                    },100);
+                                }
+                            }, 10);
+
+                            genCpf();
+                            while (!digito14.getText().toString().equals("4")) {
+                                genCpf();
+                            }
+
+                        }
+                    }, 160);
+                }
+            });
+
+            btn5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final ProgressButton progressButton5 = new ProgressButton(cnpjActivity.this, btn5);
 
                     progressButton5.buttonActivated();
                     final Handler handler = new Handler();
@@ -503,6 +470,154 @@ public class cnpjActivity extends AppCompatActivity {
                                     handler.postDelayed(new Runnable() {
                                         public void run() {
                                             progressButton5.buttonFinished();
+                                        }
+                                    },100);
+                                }
+                            }, 10);
+
+                            genCpf();
+                            while (!digito14.getText().toString().equals("5")) {
+                                genCpf();
+                            }
+
+                        }
+                    }, 160);
+                }
+            });
+
+            btn6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final ProgressButton progressButton6 = new ProgressButton(cnpjActivity.this, btn6);
+
+                    progressButton6.buttonActivated();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Handler handle1 = new Handler();
+                            handler.postDelayed(new Runnable() {
+
+                                @Override
+                                public void run() {
+
+                                    Handler handle2 = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            progressButton6.buttonFinished();
+                                        }
+                                    },100);
+                                }
+                            }, 10);
+
+                            genCpf();
+                            while (!digito14.getText().toString().equals("6")) {
+                                genCpf();
+                            }
+
+                        }
+                    }, 160);
+                }
+            });
+
+            btn7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final ProgressButton progressButton7 = new ProgressButton(cnpjActivity.this, btn7);
+
+                    progressButton7.buttonActivated();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Handler handle1 = new Handler();
+                            handler.postDelayed(new Runnable() {
+
+                                @Override
+                                public void run() {
+
+                                    Handler handle2 = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            progressButton7.buttonFinished();
+                                        }
+                                    },100);
+                                }
+                            }, 10);
+
+                            genCpf();
+                            while (!digito14.getText().toString().equals("7")) {
+                                genCpf();
+                            }
+
+                        }
+                    }, 160);
+                }
+            });
+
+            btn8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final ProgressButton progressButton8 = new ProgressButton(cnpjActivity.this, btn8);
+
+                    progressButton8.buttonActivated();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Handler handle1 = new Handler();
+                            handler.postDelayed(new Runnable() {
+
+                                @Override
+                                public void run() {
+
+                                    Handler handle2 = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            progressButton8.buttonFinished();
+                                        }
+                                    },100);
+                                }
+                            }, 10);
+
+                            genCpf();
+                            while (!digito14.getText().toString().equals("8")) {
+                                genCpf();
+                            }
+
+                        }
+                    }, 160);
+                }
+            });
+
+            btn9.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final ProgressButton progressButton9 = new ProgressButton(cnpjActivity.this, btn9);
+
+                    progressButton9.buttonActivated();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Handler handle1 = new Handler();
+                            handler.postDelayed(new Runnable() {
+
+                                @Override
+                                public void run() {
+
+                                    Handler handle2 = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            progressButton9.buttonFinished();
                                         }
                                     },100);
                                 }

@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,18 +61,20 @@ public class cpfActivity extends AppCompatActivity {
     private Button btGerar;
     private Button btClear;
 
+    private View btn0;
     private View btn1;
+    private View btn2;
     private View btn3;
+    private View btn4;
+    private View btn5;
+    private View btn6;
+    private View btn7;
+    private View btn8;
     private View btn9;
 
     public AdView adView;
 
     private ImageView copyIcon;
-    private ImageView editIcon;
-    private ImageView cancelNumberChanger;
-    private EditText numberChanger;
-    private ConstraintLayout background;
-    private String numberChanged;
 
     Intent intent;
 
@@ -84,6 +87,7 @@ public class cpfActivity extends AppCompatActivity {
     int dig7;
     int dig8;
     int dig9;
+
 
 
     @Override
@@ -130,7 +134,6 @@ public class cpfActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cpf);
 
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -151,10 +154,7 @@ public class cpfActivity extends AppCompatActivity {
         adView.setAdSize(AdSize.LARGE_BANNER);
         adView.setAdUnitId("ca-app-pub-8766426329693423/4165723218");
 
-
-
     }
-
 
  //this was making ads crash
     @Override
@@ -163,8 +163,6 @@ public class cpfActivity extends AppCompatActivity {
         adView.pause();
         super.onPause();
     }
-
-
 
     @Override
     protected void onResume() {
@@ -200,13 +198,16 @@ public class cpfActivity extends AppCompatActivity {
         btClear = findViewById(R.id.btlimp);
         btGerar = findViewById(R.id.btnGera);
         copyIcon = findViewById(R.id.copyicon);
-        editIcon = findViewById(R.id.editIcon);
-        numberChanger = findViewById(R.id.numberChanger);
+        btn0 = findViewById(R.id.btn0);
         btn1 = findViewById(R.id.btn1);
+        btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
+        btn4 = findViewById(R.id.btn4);
+        btn5 = findViewById(R.id.btn5);
+        btn6 = findViewById(R.id.btn6);
+        btn7 = findViewById(R.id.btn7);
+        btn8 = findViewById(R.id.btn8);
         btn9 = findViewById(R.id.btn9);
-        background = findViewById(R.id.background2);
-        cancelNumberChanger = findViewById(R.id.cancelNumberChanger);
     }
 
     private void init() { // create listeners for each view
@@ -294,6 +295,43 @@ public class cpfActivity extends AppCompatActivity {
             }
         });
 
+        btn0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ProgressButton progressButton0 = new ProgressButton(cpfActivity.this, btn0);
+
+                progressButton0.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Handler handle1 = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        progressButton0.buttonFinished();
+                                    }
+                                },100);
+                            }
+                        }, 10);
+
+                        genCpf();
+                        while (!digito11.getText().toString().equals("0")) {
+                            genCpf();
+                        }
+
+                    }
+                }, 160);
+            }
+        });
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -331,143 +369,50 @@ public class cpfActivity extends AppCompatActivity {
             }
         });
 
-        cancelNumberChanger.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-        cancelNumberChanger.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                numberChanger.setVisibility(View.GONE);
-                cancelNumberChanger.setVisibility(View.GONE);
-                closeKeyboard();
-                background.setVisibility(View.VISIBLE);
+            public void onClick(View v) {
 
-            }
-        });
+                final ProgressButton progressButton2 = new ProgressButton(cpfActivity.this, btn2);
 
-        editIcon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        editIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                background.setVisibility(View.GONE);
-
-                numberChanger.setVisibility(View.VISIBLE);
-                cancelNumberChanger.setVisibility(View.VISIBLE);
-                numberChanger.requestFocus();
-                closeKeyboard();
-                keyboardOpen();
-
-
-                numberChanger.setOnKeyListener(new View.OnKeyListener() {
+                progressButton2.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
                     @Override
-                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                    public void run() {
 
-                        if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
-                                (i == KeyEvent.KEYCODE_ENTER)) {
-                            // Perform action on key press
+                        Handler handle2 = new Handler();
+                        handler.postDelayed(new Runnable() {
 
-                            numberChanged = numberChanger.getText().toString().trim();
+                            @Override
+                            public void run() {
 
-                            if ( numberChanger.getText().toString().isEmpty()){
-
-                                LayoutInflater inflater = getLayoutInflater(); //custom toast
-                                View layout = inflater.inflate(R.layout.toast_layout_red,
-                                        (ViewGroup) findViewById(R.id.toast_layout_root));
-
-                                TextView text = (TextView) layout.findViewById(R.id.text);
-                                text.setText("Insira um número ");
-
-                                Toast toastRed = new Toast(getApplicationContext());
-                                toastRed.setGravity(Gravity.BOTTOM, 0, 0);
-                                toastRed.setDuration(Toast.LENGTH_SHORT);
-                                toastRed.setView(layout);
-                                toastRed.show();
-
-                                btn3.setClickable(false);
-
-                            } else {
-                                btn3.setClickable(true);
-                                btn3.callOnClick();
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        progressButton2.buttonFinished();
+                                    }
+                                },100);
                             }
+                        }, 10);
 
-
-                            return true;
+                        genCpf();
+                        while (!digito11.getText().toString().equals("2")) {
+                            genCpf();
                         }
-                        return false;
-                    }
-                });
 
+                    }
+                }, 160);
             }
         });
-
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (numberChanged != null && numberChanged.trim() != null) {
+                final ProgressButton progressButton3 = new ProgressButton(cpfActivity.this, btn3);
 
-                    final ProgressButton progressButton3 = new ProgressButton(cpfActivity.this, btn3);
-
-                    progressButton3.buttonActivated();
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            Handler handle1 = new Handler();
-                            handler.postDelayed(new Runnable() {
-
-                                @Override
-                                public void run() {
-
-                                    Handler handle2 = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        public void run() {
-                                            progressButton3.buttonFinished();
-                                        }
-                                    }, 100);
-                                }
-                            }, 10);
-
-                            genCpf();
-                            while (!digito11.getText().toString().equals(numberChanged.trim())) {
-                                genCpf();
-                            }
-
-                        }
-                    }, 160);
-
-                    numberChanger.setVisibility(View.GONE);
-                    closeKeyboard();
-                    background.setVisibility(View.VISIBLE);
-                    cancelNumberChanger.setVisibility(View.GONE);
-
-                } else {
-
-                    LayoutInflater inflater = getLayoutInflater(); //custom toast
-                    View layout = inflater.inflate(R.layout.toast_layout_red,
-                            (ViewGroup) findViewById(R.id.toast_layout_root));
-
-                    TextView text = (TextView) layout.findViewById(R.id.text);
-                    text.setText("Insira número valido");
-
-                    Toast toastRed = new Toast(getApplicationContext());
-                    toastRed.setGravity(Gravity.BOTTOM, 0, 0);
-                    toastRed.setDuration(Toast.LENGTH_SHORT);
-                    toastRed.setView(layout);
-                    toastRed.show();
-                }
-
-            }
-        });
-
-        btn9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final ProgressButton progressButton5 = new ProgressButton(cpfActivity.this, btn9);
-
-                progressButton5.buttonActivated();
+                progressButton3.buttonActivated();
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -482,7 +427,229 @@ public class cpfActivity extends AppCompatActivity {
                                 Handler handle2 = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     public void run() {
+                                        progressButton3.buttonFinished();
+                                    }
+                                },100);
+                            }
+                        }, 10);
+
+                        genCpf();
+                        while (!digito11.getText().toString().equals("3")) {
+                            genCpf();
+                        }
+
+                    }
+                }, 160);
+            }
+        });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ProgressButton progressButton4 = new ProgressButton(cpfActivity.this, btn4);
+
+                progressButton4.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Handler handle1 = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        progressButton4.buttonFinished();
+                                    }
+                                },100);
+                            }
+                        }, 10);
+
+                        genCpf();
+                        while (!digito11.getText().toString().equals("4")) {
+                            genCpf();
+                        }
+
+                    }
+                }, 160);
+            }
+        });
+
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ProgressButton progressButton5= new ProgressButton(cpfActivity.this, btn5);
+
+                progressButton5.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Handler handle2 = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
                                         progressButton5.buttonFinished();
+                                    }
+                                },100);
+                            }
+                        }, 10);
+
+                        genCpf();
+                        while (!digito11.getText().toString().equals("5")) {
+                            genCpf();
+                        }
+
+                    }
+                }, 160);
+            }
+        });
+
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ProgressButton progressButton6 = new ProgressButton(cpfActivity.this, btn6);
+
+                progressButton6.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Handler handle1 = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        progressButton6.buttonFinished();
+                                    }
+                                },100);
+                            }
+                        }, 10);
+
+                        genCpf();
+                        while (!digito11.getText().toString().equals("6")) {
+                            genCpf();
+                        }
+
+                    }
+                }, 160);
+            }
+        });
+
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ProgressButton progressButton7 = new ProgressButton(cpfActivity.this, btn7);
+
+                progressButton7.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Handler handle1 = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        progressButton7.buttonFinished();
+                                    }
+                                },100);
+                            }
+                        }, 10);
+
+                        genCpf();
+                        while (!digito11.getText().toString().equals("7")) {
+                            genCpf();
+                        }
+
+                    }
+                }, 160);
+            }
+        });
+
+        btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ProgressButton progressButton8 = new ProgressButton(cpfActivity.this, btn8);
+
+                progressButton8.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Handler handle2 = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        progressButton8.buttonFinished();
+                                    }
+                                },100);
+                            }
+                        }, 10);
+
+                        genCpf();
+                        while (!digito11.getText().toString().equals("8")) {
+                            genCpf();
+                        }
+
+                    }
+                }, 160);
+            }
+        });
+
+        btn9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ProgressButton progressButton9 = new ProgressButton(cpfActivity.this, btn9);
+
+                progressButton9.buttonActivated();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Handler handle1 = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Handler handle2 = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        progressButton9.buttonFinished();
                                     }
                                 },100);
                             }
