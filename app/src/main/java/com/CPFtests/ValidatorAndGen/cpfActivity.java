@@ -370,10 +370,11 @@ public class cpfActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //starta a recompensa
-                mAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
+
 
                 if (mAd.isLoaded()) {
+                    //starta a recompensa
+                    mAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
                     mAd.show();
                 }
 
