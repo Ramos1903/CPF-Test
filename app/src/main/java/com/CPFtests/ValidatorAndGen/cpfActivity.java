@@ -210,8 +210,6 @@ public class cpfActivity extends AppCompatActivity {
 
             @Override
             public void onRewardedVideoAdFailedToLoad(int i) {
-                Toast.makeText(getBaseContext(),
-                        "Ad failed to load.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -220,6 +218,7 @@ public class cpfActivity extends AppCompatActivity {
             }
 
         });
+
 
 
     }
@@ -245,7 +244,7 @@ public class cpfActivity extends AppCompatActivity {
     protected void onDestroy() {
         //destroy ads from the view
         adView.destroy();
-        mAd.destroy();
+        mAd.destroy(this);
         super.onDestroy();
     }
 
@@ -298,7 +297,7 @@ public class cpfActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genCpf();
-
+                mAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
             }
         });
 
@@ -370,11 +369,7 @@ public class cpfActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 if (mAd.isLoaded()) {
-                    //starta a recompensa
-                    mAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
                     mAd.show();
                 }
 
